@@ -48,26 +48,39 @@
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
             </form>
             <h3 class="font-bold text-xl mb-2">New Task</h3>
-            <form method="POST" action="/todo/create">
+            <form id='form' method="POST" action="/todo/create">
                 @csrf
 
                 <div class="mb-2">
                     <p class="font-bold mb-1">Title</p>
                     <input type="text" placeholder="Type here" name="title"
-                        class="input input-bordered input-sm min-h-10 w-full px-2" />
+                        class="input input-bordered input-sm min-h-10 w-full px-2" value='{{ old('company') }}' />
+
+                    @error('title')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div class="mb-2">
                     <p class="font-bold mb-1">Description</p>
                     <textarea placeholder="Enter task's description..." name="description"
-                        class="textarea textarea-bordered textarea-xs w-full"></textarea>
+                        class="textarea textarea-bordered textarea-xs w-full" value='{{ old('company') }}'></textarea>
+
+                    @error('description')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
                 <div>
                     <p class="font-bold mb-1">Due Date/Time</p>
-                    <input type="datetime-local" id="meeting-time" class="border px-1 py-2 w-full" name="meeting-time"
-                        min="{{ date('Y-m-d\TH:i') }}" />
+                    <input type="datetime-local" id="meeting-time" class="border px-1 py-2 w-full" name="datetime"
+                        min="{{ date('Y-m-d\TH:i') }}" value='{{ old('company') }}' />
+
+                    @error('datetime')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <button class="btn btn-sm min-h-10 w-full mt-6 bg-blue-400 hover:bg-blue-500">Create</button>
+                <button type="submit"
+                    class="btn btn-sm min-h-10 w-full mt-6 bg-blue-400 hover:bg-blue-500">Create</button>
             </form>
         </div>
     </dialog>
@@ -79,7 +92,7 @@
             <div>
                 <span
                     class="hover:bg-gray-200 ease-in transition duration-200 select-none flex items-center px-4 py-[.775rem] cursor-pointer  rounded-[.95rem] rounded-r-none">
-                    <a href="/today"
+                    <a href="/"
                         class="flex items-center flex-grow text-[1.15rem] dark:text-neutral-400/75 text-stone-500 hover:text-dark">Today</a>
                 </span>
             </div>
