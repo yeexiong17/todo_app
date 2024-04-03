@@ -32,14 +32,42 @@ class DatabaseSeeder extends Seeder
             'title' => 'Test task 2',
             'description' => 'This is a test task 2',
             'done' => 0,
-            'datetime' => '2024-04-02 18:46'
+            'datetime' => '2024-04-03 04:22'
         ]);
 
         Todo::factory()->create([
             'title' => 'Test task 3',
             'description' => 'This is a test task 3',
             'done' => 0,
-            'datetime' => '2024-04-02 18:46'
+            'datetime' => '2024-04-03 10:25'
+        ]);
+
+        Todo::factory()->create([
+            'title' => 'Test task 4',
+            'description' => 'This is a test task 4',
+            'done' => 0,
+            'datetime' => '2024-04-03 05:22'
+        ]);
+
+        Todo::factory()->create([
+            'title' => 'Test task 5',
+            'description' => 'This is a test task 5',
+            'done' => 0,
+            'datetime' => '2024-04-03 10:00'
+        ]);
+
+        Todo::factory()->create([
+            'title' => 'Test task 6',
+            'description' => 'This is a test task 6',
+            'done' => 0,
+            'datetime' => '2024-04-03 19:22'
+        ]);
+
+        Todo::factory()->create([
+            'title' => 'Test task 7',
+            'description' => 'This is a test task 7',
+            'done' => 0,
+            'datetime' => '2024-04-03 10:01'
         ]);
     }
 }

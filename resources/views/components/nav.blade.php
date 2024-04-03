@@ -1,5 +1,5 @@
 <nav class="z-50 border-b">
-    <div class="navbar bg-base-100">
+    <div class="navbar bg-base-100 pr-4">
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
@@ -43,7 +43,7 @@
                     </div>
                 </button>
                 <ul tabindex="0"
-                    class="dropdown-content right-2 top-16 z-[1] menu px-4 py-2 shadow bg-base-100 rounded w-80">
+                    class="dropdown-content right-2 top-16 z-[1] menu px-4 py-2 shadow bg-base-100 rounded w-96">
                     {{-- Shows all notifications --}}
                     <div class="flex flex-row items-center">
                         <h1 class="font-bold text-lg">Notifications</h1>

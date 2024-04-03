@@ -15,7 +15,7 @@
             <div class="ml-2 truncate w-28">
                 <a href="javascript:void(0)"
                     class="w-5 pr-2 truncate dark:hover:text-primary hover:text-primary transition-colors duration-200 ease-in-out text-base font-medium dark:text-neutral-400/90 text-secondary-inverse">
-                    Robert
+                    User
                 </a>
             </div>
         </div>
@@ -88,7 +88,6 @@
     <div class="relative pl-3 my-5">
         <div class="flex flex-col w-full font-medium">
 
-            <!-- menu item -->
             <div>
                 <span
                     class="hover:bg-gray-200 ease-in transition duration-200 select-none flex items-center px-4 py-[.775rem] cursor-pointer  rounded-[.95rem] rounded-r-none">
@@ -98,21 +97,19 @@
             </div>
 
 
-            <!-- menu item -->
             <div>
                 <span
                     class="hover:bg-gray-200 ease-in transition duration-200 select-none flex items-center px-4 py-[.775rem] cursor-pointer rounded-[.95rem] rounded-r-none">
-                    <a href="javascript:;"
+                    <a href="/week"
                         class="flex items-center flex-grow text-[1.15rem] dark:text-neutral-400/75 text-stone-500 hover:text-dark">
                         Week</a>
                 </span>
             </div>
 
-            <!-- menu item -->
             <div>
                 <span
                     class="hover:bg-gray-200 ease-in transition duration-200 select-none flex items-center px-4 py-[.775rem] cursor-pointer rounded-[.95rem] rounded-r-none">
-                    <a href="javascript:;"
+                    <a href="/month"
                         class="flex items-center flex-grow text-[1.15rem] dark:text-neutral-400/75 text-stone-500 hover:text-dark">
                         Month</a>
                 </span>
