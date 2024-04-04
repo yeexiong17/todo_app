@@ -18,7 +18,7 @@
     <x-nav />
     <x-sidebar />
 
-    <main class="ml-[19rem] pr-8 pb-10">
+    <main class="md:ml-[19rem] md:pr-8 px-8 md:px-0 pb-10">
         {{ $slot }}
     </main>
 </body>

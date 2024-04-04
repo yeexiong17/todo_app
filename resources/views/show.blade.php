@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="text-2xl font-bold mt-4">{{ $heading }}</h1>
 
-    <div class="grid mt-4 grid-cols-2">
+    <div class="grid mt-4 grid-cols-1 md:grid-cols-2">
         @unless (count($todoData) == 0)
             @foreach ($todoData as $data)
                 <?php
@@ -23,78 +23,17 @@
                                     </p>
                                 </div>
                             </div>
-                            <p class="truncate">
+                            <p class="line-clamp-1">
                                 {{ $data->description }}
                             </p>
                         </div>
 
-                        {{-- Edit Button --}}
-                        <div>
-                            @if ($data->done == 0)
-                                <button onclick="handleEdit(event, '{{ $data->id }}')"
-                                    class="btn btn-square mr-4 bg-white border-none shadow-none">
-                                    <?xml version="1.0" ?>
-                                    <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
-                                        width="24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
-                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
-                                    </svg>
-                                </button>
-                            @else
-                                <p class="font-bold mr-4 text-blue-500">Done</p>
-                            @endif
-
-                            <dialog id="edit_modal_{{ $data->id }}" class="modal">
-                                <div class="modal-box">
-                                    <form method="dialog">
-                                        <button onclick="onEditModalClose()"
-                                            class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
-                                    </form>
-                                    <h3 class="font-bold text-xl">Edit Note</h3>
-                                    <form id='form' method="POST" action="/todo/edit/{{ $data->id }}">
-                                        @csrf
-                                        @method('PUT')
-
-                                        <div class="mt-2 mb-2">
-                                            <p class="font-bold mb-1">Title</p>
-                                            <input type="text" placeholder="Type here" name="title"
-                                                class="edit_title input input-bordered input-sm min-h-10 w-full px-2"
-                                                value='{{ $data->title }}' />
-
-                                            @error('title')
-                                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div class="mb-2">
-                                            <p class="font-bold mb-1">Description</p>
-                                            <textarea placeholder="Enter task's description..." name="description"
-                                                class="edit_description textarea textarea-bordered textarea-xs text-sm w-full">{{ $data->description }}</textarea>
-
-                                            @error('description')
-                                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-                                        <div>
-                                            <p class="font-bold mb-1">Due Date/Time</p>
-                                            <input type="datetime-local" id="meeting-time"
-                                                class="edit_datetime border px-1 py-2 w-full" name="datetime"
-                                                min="{{ date('Y-m-d\TH:i') }}" value='{{ $data->datetime }}' />
-
-                                            @error('datetime')
-                                                <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                                            @enderror
-                                        </div>
-
-                                        <button type="submit"
-                                            class="btn btn-sm min-h-10 w-full mt-6 bg-blue-400 hover:bg-blue-500">Update</button>
-                                    </form>
-                                </div>
-                            </dialog>
-                        </div>
+                        @if ($data->done != 0)
+                            <p class="font-bold mr-4 text-blue-500">Done</p>
+                        @endif
                     </div>
                 </a>
-                <dialog id="show_modal_{{ $data->id }}" class="modal modal-bottom sm:modal-middle">
+                <dialog id="show_modal_{{ $data->id }}" class="modal modal-middle">
                     <div class="modal-box">
                         <div class="flex flex-col justify-center">
                             <div class="flex flex-row items-center">
@@ -152,11 +91,74 @@
 
                         </div>
 
-                        <p id='modal_description' class="min-h-32 max-h-44 my-4 border-t pt-2 overflow-y-auto text-wrap">
+                        <p id='modal_description'
+                            class="min-h-32 max-h-44 my-4 border-t pt-2 overflow-y-auto text-wrap text-sm">
                             {{ $data->description }}
                         </p>
 
                         <div class="modal-action mt-10">
+
+                            {{-- Edit Button --}}
+                            <div>
+                                <button onclick="handleEdit('{{ $data->id }}')"
+                                    class="btn btn-square mr-4 bg-white border-none shadow-none">
+                                    <?xml version="1.0" ?>
+                                    <svg class="feather feather-edit" fill="none" height="24" stroke="currentColor"
+                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24"
+                                        width="24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                                    </svg>
+                                </button>
+
+
+                                <dialog id="edit_modal_{{ $data->id }}" class="modal">
+                                    <div class="modal-box">
+                                        <form method="dialog">
+                                            <button onclick="onEditModalClose()"
+                                                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                        </form>
+                                        <h3 class="font-bold text-xl">Edit Note</h3>
+                                        <form id='form' method="POST" action="/todo/edit/{{ $data->id }}">
+                                            @csrf
+                                            @method('PUT')
+
+                                            <div class="mt-2 mb-2">
+                                                <p class="font-bold mb-1">Title</p>
+                                                <input type="text" placeholder="Type here" name="title"
+                                                    class="edit_title input input-bordered input-sm min-h-10 w-full px-2"
+                                                    value='{{ $data->title }}' />
+
+                                                @error('title')
+                                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div class="mb-2">
+                                                <p class="font-bold mb-1">Description</p>
+                                                <textarea placeholder="Enter task's description..." name="description"
+                                                    class="edit_description textarea textarea-bordered textarea-xs text-sm w-full">{{ $data->description }}</textarea>
+
+                                                @error('description')
+                                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+                                            <div>
+                                                <p class="font-bold mb-1">Due Date/Time</p>
+                                                <input type="datetime-local" id="meeting-time"
+                                                    class="edit_datetime border px-1 py-2 w-full" name="datetime"
+                                                    value='{{ $data->datetime }}' />
+
+                                                @error('datetime')
+                                                    <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                                                @enderror
+                                            </div>
+
+                                            <button type="submit"
+                                                class="btn btn-sm min-h-10 w-full mt-6 bg-blue-400 hover:bg-blue-500">Update</button>
+                                        </form>
+                                    </div>
+                                </dialog>
+                            </div>
 
                             {{-- Delete Button --}}
                             <div x-data='{ deleting: false }' class="flex flex-row items-center">
@@ -195,14 +197,59 @@
                 </dialog>
             @endforeach
         @else
-            <p class="text-lg">No task for today!</p>
+            <p class="text-lg">No task found!</p>
         @endunless
-
     </div>
+    <button id='test' onclick="my_modal_3.showModal()"
+        class="md:hidden btn btn-sm w-full h-10 px-6 mt-10 mx-auto text-base bg-blue-400 hover:bg-blue-500">
+        + New Task
+    </button>
+
+    <dialog id="my_modal_3" class="modal">
+        <div class="modal-box mb-16">
+            <form method="dialog">
+                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="font-bold text-xl mb-2">New Task</h3>
+            <form id='form' method="POST" action="/todo/create">
+                @csrf
+
+                <div class="mb-2">
+                    <p class="font-bold mb-1">Title</p>
+                    <input type="text" placeholder="Type here" name="title"
+                        class="input input-bordered input-sm min-h-10 w-full px-2" value='{{ old('company') }}' />
+
+                    @error('title')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div class="mb-2">
+                    <p class="font-bold mb-1">Description</p>
+                    <textarea placeholder="Enter task's description..." name="description"
+                        class="textarea textarea-bordered textarea-xs w-full" value='{{ old('company') }}'></textarea>
+
+                    @error('description')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+                <div>
+                    <p class="font-bold mb-1">Due Date/Time</p>
+                    <input type="datetime-local" id="meeting-time" class="border px-1 py-2 w-full" name="datetime"
+                        min="{{ date('Y-m-d\TH:i') }}" value='{{ old('company') }}' />
+
+                    @error('datetime')
+                        <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit"
+                    class="btn btn-sm min-h-10 w-full mt-6 bg-blue-400 hover:bg-blue-500">Create</button>
+            </form>
+        </div>
+    </dialog>
 
     <script>
-        function handleEdit(e, id) {
-            e.stopImmediatePropagation()
+        function handleEdit(id) {
             document.querySelector(`#edit_modal_${id}`).showModal()
             document.querySelector(`#edit_modal_${id}`).setAttribute("open", "false");
 

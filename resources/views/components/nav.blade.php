@@ -1,6 +1,6 @@
 <nav class="z-50 border-b">
     <div class="navbar bg-base-100 pr-4">
-        <div class="navbar-start">
+        <div class="navbar-start w-fit">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -11,25 +11,40 @@
                 </div>
                 <ul tabindex="0"
                     class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Homepage</a></li>
-                    <li><a>Portfolio</a></li>
-                    <li><a>About</a></li>
+                    <li>
+                        <a href="/" class="flex items-center flex-grow text-[1.15rem] py-3">
+                            Today
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/week" class="flex items-center flex-grow text-[1.15rem] py-3">
+                            Week
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/month" class="flex items-center flex-grow text-[1.15rem] py-3">
+                            Month
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
         <div class="navbar-center">
             <a class="btn btn-ghost text-xl"></a>
         </div>
-        <div class="navbar-end">
-            <input type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs" />
+        <div class="navbar-end grow">
+            <form action="/search-result" class="flex flex-row items-center w-full">
+                <input type="text" name="search" placeholder="Type here"
+                    class="input input-bordered w-full max-w-xs ml-auto" />
 
-            <button class="btn btn-ghost btn-circle">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-            </button>
+                <button type="submit" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+            </form>
 
             <div class="dropdown">
                 <button class="btn btn-ghost btn-circle">

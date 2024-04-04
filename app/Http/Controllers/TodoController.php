@@ -31,20 +31,28 @@ class TodoController extends Controller
         ]);
     }
 
+    public function searchResult()
+    {
+        return view('show', [
+            'heading' => 'Search Result',
+            'todoData' => Todo::latest()->filter(request(['search']))->get()
+        ]);
+    }
+
     public function showMonth()
     {
         $now = Carbon::now();
-        // dd($now->startOfMonth());
-
+        // dd($now->month);
 
         return view('month', [
             'countMonth' => $this->monthCount,
             'startDay' => $now->startOfMonth()->dayOfWeek,
             'countDay' => $now->daysInMonth,
+            'dateToday' => $now->toDate()->format('Y-m-d'),
             'currentYear' => $now->year,
             'currentMonth' => $now->monthName,
             'numOfDays' => $now->daysInMonth(),
-            'todoData' => Todo::latest()->filter(['type' => 'month'])->get()
+            'todoData' => Todo::latest()->filter(['type' => 'month', 'dateObject' => $now])->get()
         ]);
     }
 
@@ -53,9 +61,9 @@ class TodoController extends Controller
         $now = Carbon::now();
 
         // dd($now->month((int) request('month'))->startOfMonth()->dayOfWeek);
-        $this->monthCount = (int)request('month');
+        $this->monthCount = (int)request('monthCount');
 
-        $chosenMonth = $now->month((int)request('month'));
+        $chosenMonth = $now->month((int)request('monthCount'));
 
         // dd($chosenMonth->startOfMonth()->dayOfWeek);
 
@@ -64,10 +72,11 @@ class TodoController extends Controller
             'startDay' => $chosenMonth->startOfMonth()->dayOfWeek,
             'firstDayMonth' => $chosenMonth->firstOfMonth(),
             'countDay' => $chosenMonth->daysInMonth,
+            'dateToday' => $chosenMonth->day,
             'currentYear' =>  $chosenMonth->year,
             'currentMonth' => $chosenMonth->monthName,
             'numOfDays' => $now->daysInMonth(),
-            'todoData' => Todo::latest()->filter(['type' => 'month'])->get()
+            'todoData' => Todo::latest()->filter(['type' => 'month', 'dateObject' => $chosenMonth])->get()
         ]);
     }
 
