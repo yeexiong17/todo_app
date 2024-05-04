@@ -10,7 +10,13 @@ class Todo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'datetime', 'done'];
+    protected $fillable = [
+        'title',
+        'description',
+        'datetime',
+        'done',
+        'user_id',
+    ];
 
     public function scopeFilter($query, array $filters)
     {
@@ -36,5 +42,10 @@ class Todo extends Model
                 $query->whereBetween('datetime', [$monthStartDate, $monthEndDate]);
             }
         }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

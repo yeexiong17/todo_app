@@ -21,7 +21,13 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
+        $user = User::factory()->create([
+            'name' => 'John Doe',
+            'email' => 'john@gmail.com'
+        ]);
+
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 1',
             'description' => 'This is a test task 1',
             'done' => 0,
@@ -29,6 +35,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 2',
             'description' => 'This is a test task 2',
             'done' => 0,
@@ -36,6 +43,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 3',
             'description' => 'This is a test task 3',
             'done' => 0,
@@ -43,6 +51,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 4',
             'description' => 'This is a test task 4',
             'done' => 0,
@@ -50,6 +59,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 5',
             'description' => 'This is a test task 5',
             'done' => 0,
@@ -57,6 +67,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 6',
             'description' => 'This is a test task 6',
             'done' => 0,
@@ -64,6 +75,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Todo::factory()->create([
+            'user_id' => $user->id,
             'title' => 'Test task 7',
             'description' => 'This is a test task 7',
             'done' => 0,

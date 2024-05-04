@@ -200,12 +200,12 @@
             <p class="text-lg">No task found!</p>
         @endunless
     </div>
-    <button id='test' onclick="my_modal_3.showModal()"
+    <button id='test' onclick="small_add_modal_3.showModal()"
         class="md:hidden btn btn-sm w-full h-10 px-6 mt-10 mx-auto text-base bg-blue-400 hover:bg-blue-500">
         + New Task
     </button>
 
-    <dialog id="my_modal_3" class="modal">
+    <dialog id="small_add_modal_3" class="modal">
         <div class="modal-box mb-16">
             <form method="dialog">
                 <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>

@@ -85,10 +85,11 @@ class TodoController extends Controller
         $formfields = $request->validate([
             'title' => 'required',
             'description' => 'required',
-            'datetime' => 'required'
+            'datetime' => 'required',
         ]);
 
         $formfields['datetime'] =  str_replace('T', ' ', $request->datetime);
+        $formfields['user_id'] = 1;
 
         Todo::create($formfields);
 
